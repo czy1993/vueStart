@@ -4,6 +4,7 @@ import baseUrl from "../global.js";
 Vue.prototype.$http= axios;
 var axiosURL = {
     kindSum: "/inter/ticket/kindSum",
+    queryLotteryOrderOwn: "/inter/user/queryLotteryOrderOwn",
 }
 export function request(type = 'POST',name = '',data = ''){
     return new Promise(function (resolve,reject){
