@@ -1,36 +1,49 @@
 <template>
     <div class="home">
-        <h1>我是home主页</h1>
-        <ul>
+        <FooterBar></FooterBar>
+        <!-- <ul>
             <li v-for="item in lottery_List">
                 <span>{{item.baseLotteryClassId}}</span>
                 <span>{{item.baseLotteryId}}</span>
                 <span>{{item.lotteryType}}</span>
                 <span>{{item.name}}</span>
             </li>
-        </ul>
+        </ul> -->
+        <div class="nav">
+            <NvaA v-if="types=='1'"></NvaA>
+            <NvaB v-else-if="types=='2'"></NvaB>
+        </div>
     </div>
 </template>
 <script>
 import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
+import FooterBar from "../commen/footerBar.vue"
+import NvaA from "../components/nav_I.vue"
+import NvaB from "../components/nav_II.vue"
 export default {
     data(){
         return{
             lottery_List:[]
         }
     },
+    components:{
+        FooterBar,
+        NvaA,
+        NvaB,
+    },
     created(){
-        this.kindSum().then( res => {
-            // console.log(res);
-            this.lottery_List = res;
-        })
+        // this.kindSum().then( res => {
+        //     this.lottery_List = res;
+        // })
     },
     computed:{
+        ...mapState(['types']),
         ...mapState('homeIndex',['lotteryList'])
     },
     methods:{
         ...mapActions('homeIndex',['kindSum']),
         ...mapMutations('homeIndex',['savekindSum']),
+        ...mapMutations(['getTypes'])
 
     }
 }
@@ -53,6 +66,12 @@ export default {
                 box-sizing: border-box;
                 padding: 0 10px;
             }
+        }
+        .nav{
+            width: 100%;
+            overflow: auto;
+            min-height: 500px;
+            // background: gold;
         }
     }
 </style>

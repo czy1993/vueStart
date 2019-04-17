@@ -4,7 +4,8 @@ import home_index from "./home/homeIndex.js"
 Vue.use(Vuex);
 const state={   //初始化一个colects数组（全局对象）
     isFooter:true,
-    changebelNum:0
+    changebelNum:0,
+    types:1
 }
 const getters ={  // 实时监听state值得变化（最新状态）
     isShow(state){
@@ -21,6 +22,10 @@ const mutations ={
     },
     newNum(state,sum){
         state.changebelNum += sum;
+    },
+    getTypes(state,obj){
+        state.types = obj;
+        console.log(obj)
     }
 }
 const actions={
